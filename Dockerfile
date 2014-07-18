@@ -11,12 +11,12 @@ RUN apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml
 # Install sshd
 RUN apt-get install -y openssh-server
 RUN mkdir -p /var/run/sshd /root/.ssh
-RUN echo 'root:password' |chpasswd
+RUN echo 'root:password' | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 
 # Install supervisord
 RUN apt-get install -y supervisor
-
 RUN apt-get clean
 
 # Install rbenv
